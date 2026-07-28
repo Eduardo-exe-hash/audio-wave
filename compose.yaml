@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16.14
+    container_name: postgres-audiowave
+    restart: always
+    environment:
+      POSTGRES_DB: audiowave_db
+      POSTGRES_PASSWORD: DCD453145
+      POSTGRES_USER: postgres
+    ports:
+      - '5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d audiowave_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: .
+    container_name: backend-audiowave
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/audiowave_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: DCD453145
+    depends_on:
+      postgres:
+        condition: service_healthy
+    user: "1000:1000"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1g
+volumes:
+  postgres_data:
