@@ -15,9 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Getter
@@ -61,6 +59,17 @@ public class Users implements UserDetails {
     @Getter
     @Column(name = "reset_token_expiry")
     public Instant resetTokenExpiry;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_users_favorite_audios",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "audio_id")
+    )
+    private Set<Users> favoritedByUsers = new HashSet<>();
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true )
+    private List<Playlist> playlists = new ArrayList<>();
 
     public Users( String email, String password, UserRole role){
         this.email = email;

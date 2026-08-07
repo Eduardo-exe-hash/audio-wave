@@ -33,6 +33,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/reset-password").permitAll()
                         .requestMatchers(HttpMethod.POST,"/api/users/","/api/users/**").permitAll()
+                        .requestMatchers( "/api/music/**").permitAll()
+                        .requestMatchers( "/playlists/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/delete").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

@@ -3,7 +3,7 @@ package com.example.audio_wave.backend.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public record VerifyPasswordDTO(
-        @NotBlank(message = "The password is ")
+        @NotBlank(message = "The password is required")
         String password
 ) {
 }

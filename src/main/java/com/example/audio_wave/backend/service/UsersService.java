@@ -49,7 +49,7 @@ public class UsersService {
     }
 
     public UsersDTO getUserByEmail(String email){
-        return usersRepository.findByEmail(email).map(UsersDTO::new)
+        return usersRepository.findUserByEmail(email).map(UsersDTO::new)
                 .orElseThrow(() -> new EmailNotFoundException("User e-mail not found!"));
     }
     public UsersDTO getUserById(UUID id){
@@ -75,7 +75,7 @@ public class UsersService {
         if (dto.email() != null && !dto.email().isBlank()){
             String newlogin = dto.email().toLowerCase().trim();
             if (!newlogin.equalsIgnoreCase(users.getEmail())){
-                Optional<Users> userNewEmail = usersRepository.findByEmail(newlogin);
+                Optional<Users> userNewEmail = usersRepository.findUserByEmail(newlogin);
                 if (userNewEmail.isPresent() && !userNewEmail.get().getId().equals(id)){
                     throw new UsersAlreadyExistsException("Email already exists!");
                 }
