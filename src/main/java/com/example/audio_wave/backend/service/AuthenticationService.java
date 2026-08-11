@@ -38,12 +38,12 @@ public class AuthenticationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usersRepository.findByEmail(username)
+        return usersRepository.findUserByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
     }
 
     public JwtResponse login(LoginDTO data){
-        Users users = usersRepository.findByEmail(data.email())
+        Users users = usersRepository.findUserByEmail(data.email())
                 .orElseThrow(() -> new EmailNotFoundException("Email not found!"));
         if (!passwordEncoder.matches(data.password(), users.getPassword())){
             throw new InvalidPasswordException("Invalid password");
@@ -68,7 +68,7 @@ public class AuthenticationService implements UserDetailsService {
             throw new RuntimeException("Cannot find user data!");
         }
 
-        Users currentUser = usersRepository.findByEmail(userEmail)
+        Users currentUser = usersRepository.findUserByEmail(userEmail)
                 .orElseThrow(() -> new UsersNotFoundException("Auth user ["+userEmail+"] not found"));
         if (!passwordEncoder.matches(data.password(), currentUser.getPassword())){
             throw new InvalidPasswordException("Current password's incorret");
@@ -76,7 +76,7 @@ public class AuthenticationService implements UserDetailsService {
     }
 
     public void resetPassword(String email){
-        Users users = usersRepository.findByEmail(email).orElse(null);
+        Users users = usersRepository.findUserByEmail(email).orElse(null);
 
         if (users != null){
             String resetToken = UUID.randomUUID().toString();
