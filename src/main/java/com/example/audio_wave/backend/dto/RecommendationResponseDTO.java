@@ -1,15 +1,11 @@
 package com.example.audio_wave.backend.dto;
 
-public record AudioResponseDTO(
-        Long id,
+public record RecommendationResponseDTO(
         String jamendoId,
         String musicTitle,
         String artistName,
         String albumName,
-        String genre,
         Integer durationSeconds,
-        String audioUrl,
         String coverImageUrl
-
 ) {
 }

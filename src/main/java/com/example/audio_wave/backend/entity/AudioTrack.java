@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -30,6 +28,10 @@ public class AudioTrack {
 
     private String artistName;
     private String albumName;
+
+    @Column(name = "genre", length = 50)
+    private String genre;
+
     private Integer durationSeconds;
     private String audioUrl;
     private String coverImage;

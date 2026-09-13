@@ -1,0 +1,2 @@
+ALTER TABLE tb_audio
+ADD COLUMN genre VARCHAR(50);

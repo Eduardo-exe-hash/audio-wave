@@ -121,6 +121,7 @@ public class PlaylistService {
                         audioTrack.getMusicTitle(),
                         audioTrack.getArtistName(),
                         audioTrack.getAlbumName(),
+                        audioTrack.getGenre(),
                         audioTrack.getDurationSeconds(),
                         audioTrack.getAudioUrl(),
                         audioTrack.getCoverImage()

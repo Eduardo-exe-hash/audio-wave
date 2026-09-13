@@ -12,6 +12,7 @@ public record AddAudioToPlaylistDTO(
 
         String artistName,
         String albumName,
+        String genre,
 
         @NotNull(message = "Duration music is required")
         Integer durationSeconds,
