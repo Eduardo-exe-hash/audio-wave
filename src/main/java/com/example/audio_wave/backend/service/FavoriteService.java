@@ -42,6 +42,7 @@ public class FavoriteService {
                     newAudio.setMusicTitle(dto.musicTitle());
                     newAudio.setArtistName(dto.artistName());
                     newAudio.setAlbumName(dto.albumName());
+                    newAudio.setGenre(dto.genre());
                     newAudio.setDurationSeconds(dto.durationSeconds());
                     newAudio.setAudioUrl(dto.audioUrl());
                     newAudio.setCoverImage(dto.coverImageUrl());

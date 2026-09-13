@@ -28,6 +28,10 @@ public class AudioTrack {
 
     private String artistName;
     private String albumName;
+
+    @Column(name = "genre", length = 50)
+    private String genre;
+
     private Integer durationSeconds;
     private String audioUrl;
     private String coverImage;
