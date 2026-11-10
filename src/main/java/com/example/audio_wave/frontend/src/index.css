@@ -1,0 +1,60 @@
+
+/* Reset básico */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Configuração do documento */
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Container principal do React */
+#root {
+  min-height: 100vh;
+}
+
+/* Configuração do body */
+body {
+  margin: 0;
+}
+
+/* Botão de logout */
+.logout-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ff5b5b;
+  background: rgba(239, 68, 68, 0.10);
+
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+  color: #ff7777;
+  background: rgba(239, 68, 68, 0.20);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: translateY(-2px);
+}
+
+.logout-button:active {
+  transform: scale(0.95);
+}

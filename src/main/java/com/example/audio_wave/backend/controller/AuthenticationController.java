@@ -2,6 +2,7 @@ package com.example.audio_wave.backend.controller;
 
 import com.example.audio_wave.backend.dto.*;
 import com.example.audio_wave.backend.entity.Users;
+import com.example.audio_wave.backend.enums.UserRole;
 import com.example.audio_wave.backend.exception.InvalidTokenException;
 import com.example.audio_wave.backend.repository.UsersRepository;
 import com.example.audio_wave.backend.security.JwtService;
@@ -17,7 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthenticationController {
 
     @Autowired
@@ -78,7 +79,7 @@ public class AuthenticationController {
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
         if(this.usersRepository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        Users newUsers = new Users(data.email(), encryptedPassword, data.role());
+        Users newUsers = new Users(data.email(), encryptedPassword, UserRole.USER);
 
         this.usersRepository.save(newUsers);
 

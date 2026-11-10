@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/favorites")
+@RequestMapping("/api/favorites")
 public class FavoriteController {
 
     @Autowired
@@ -32,9 +32,21 @@ public class FavoriteController {
     @DeleteMapping("/{audioId}")
     public ResponseEntity<Void> removeFavorite(
             @AuthenticationPrincipal Users users,
-            @PathVariable Long audioId){
+            @PathVariable Long audioId) {
 
-        favoriteService.removeFromFavorite(users.getId(),audioId);
+        if (users == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        boolean removed = favoriteService.removeFromFavorite(
+                users.getId(),
+                audioId
+        );
+
+        if (!removed) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.noContent().build();
     }
 

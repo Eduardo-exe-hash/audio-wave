@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/recommendations")
+@RequestMapping("/api/recommendations")
 public class RecommendationsController {
 
     @Autowired
@@ -21,8 +21,15 @@ public class RecommendationsController {
 
     @GetMapping
     public ResponseEntity<List<RecommendationResponseDTO>> getRecommendations(@AuthenticationPrincipal Users users){
+
+        if( users == null) {
+            return ResponseEntity.status(401).build();
+        }
         List<RecommendationResponseDTO> recommendation = recommendationService.getRecommendationsForUser(users.getId());
         return ResponseEntity.ok(recommendation);
     }
+
+
+
 
 }

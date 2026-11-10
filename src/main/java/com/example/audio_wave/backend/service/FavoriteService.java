@@ -60,13 +60,30 @@ public class FavoriteService {
     }
 
     @Transactional
-    public void removeFromFavorite(UUID usersId, Long audioId){
-        FavoriteId favoriteId = new FavoriteId(usersId,audioId);
+    public boolean removeFromFavorite(UUID usersId, Long jamendoId) {
 
-        if (!favoriteRepository.existsById(favoriteId)){
-            throw new RuntimeException("Music not found!");
+        // Localiza a música pelo ID externo do Jamendo
+        AudioTrack audioTrack = audioRepository
+                .findByJamendoId(String.valueOf(jamendoId))
+                .orElse(null);
+
+        if (audioTrack == null) {
+            return false;
         }
+
+        // Recupera o ID interno da música
+        Long audioId = audioTrack.getId();
+
+        // A chave composta utiliza o ID do usuário e o ID interno da música
+        FavoriteId favoriteId = new FavoriteId(usersId, audioId);
+
+        if (!favoriteRepository.existsById(favoriteId)) {
+            return false;
+        }
+
         favoriteRepository.deleteById(favoriteId);
+
+        return true;
     }
 
     @Transactional(readOnly = true)

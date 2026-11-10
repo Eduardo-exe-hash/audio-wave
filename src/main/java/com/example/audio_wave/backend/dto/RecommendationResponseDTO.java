@@ -6,6 +6,7 @@ public record RecommendationResponseDTO(
         String artistName,
         String albumName,
         Integer durationSeconds,
-        String coverImageUrl
+        String coverImageUrl,
+        String audioUrl
 ) {
 }

@@ -1,0 +1,292 @@
+
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Cores de fundo */
+    --bg-main: #0B0E14;
+    --bg-surface: #161B26;
+    --bg-surface-hover: #212838;
+
+    /* Cores de destaque personalizáveis */
+    --accent-primary: #8B5CF6;
+    --accent-hover: #A78BFA;
+    --accent-cyan: #06B6D4;
+    --accent-rgb: 139, 92, 246;
+
+    /* Cores de texto */
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+
+    /* Configurações globais */
+    color-scheme: dark;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    min-height: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background-color: var(--accent-primary);
+    color: #FFFFFF;
+  }
+}
+
+/* =========================================
+   PERSONALIZAÇÃO DE TEMA
+========================================= */
+
+/* Cor principal */
+.accent-bg {
+  background-color: var(--accent-primary);
+}
+
+.accent-text {
+  color: var(--accent-primary);
+}
+
+.accent-border {
+  border-color: var(--accent-primary);
+}
+
+/* Cor ao passar o mouse */
+.accent-hover:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Efeito de foco */
+.accent-focus:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+/* Transparência da cor principal */
+.accent-bg-transparent {
+  background-color: rgba(var(--accent-rgb), 0.15);
+}
+
+/* Sombras personalizadas */
+.accent-shadow {
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.25);
+}
+
+/* =========================================
+   PLAYER - CONTROLES PERSONALIZÁVEIS
+========================================= */
+
+.theme-range {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  cursor: pointer;
+
+  /* Preenchimento dinâmico */
+  background: linear-gradient(
+    to right,
+    var(--accent-primary) 0%,
+    var(--accent-primary) var(--range-progress, 0%),
+    var(--bg-surface-hover) var(--range-progress, 0%),
+    var(--bg-surface-hover) 100%
+  );
+}
+
+/* Chrome, Edge e Safari */
+.theme-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.theme-range::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+  border-radius: 50%;
+
+  background: var(--accent-primary);
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.theme-range::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+/* Firefox */
+.theme-range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.theme-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+
+  background: var(--accent-primary);
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.theme-range::-moz-range-thumb:hover {
+  transform: scale(1.25);
+}
+
+/* Foco */
+.theme-range:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 4px;
+}
+
+.track-card:hover {
+  box-shadow: 0 10px 30px var(--card-accent-shadow);
+}
+
+/* =========================================
+   COMPONENTES ADAPTÁVEIS AO TEMA
+========================================= */
+
+/* Brilho decorativo do cabeçalho */
+.theme-glow {
+  background-color: rgba(var(--accent-rgb), 0.08);
+}
+
+/* Texto com gradiente personalizado */
+.accent-gradient-text {
+  background: linear-gradient(
+    to right,
+    var(--accent-primary),
+    var(--accent-hover)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Pequeno indicador de destaque */
+.accent-dot {
+  background-color: var(--accent-primary);
+}
+
+/* Borda que acompanha o tema no hover */
+.accent-border-hover:hover {
+  border-color: var(--accent-primary);
+}
+
+/* Fundo de card ao passar o mouse */
+.accent-card-hover:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--accent-primary) 8%,
+    var(--bg-surface)
+  );
+}
+
+/* Fundo suave para elementos destacados */
+.accent-soft-bg {
+  background-color: rgba(var(--accent-rgb), 0.08);
+  border-color: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent-primary);
+}
+
+/* =========================================
+   PLAYLISTS - PERSONALIZAÇÃO DINÂMICA
+========================================= */
+
+/* Gradiente adaptável ao tema */
+.accent-gradient-bg {
+  background: linear-gradient(
+    135deg,
+    var(--accent-primary),
+    var(--accent-hover),
+    color-mix(
+      in srgb,
+      var(--accent-primary) 45%,
+      #111827
+    )
+  );
+}
+
+/* Brilho decorativo da capa */
+.accent-glow {
+  background-color: color-mix(
+    in srgb,
+    var(--accent-primary) 20%,
+    transparent
+  );
+}
+
+/* Texto que muda de cor no hover do card */
+.group:hover .accent-group-hover {
+  color: var(--accent-hover);
+}
+
+/* Sombra dinâmica dos botões */
+.accent-shadow-hover:hover {
+  box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.20);
+}
+
+/* Foco dos campos de formulário */
+.accent-input-focus:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.20);
+}
+
+/* Foco dos elementos interativos */
+.accent-focus:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}

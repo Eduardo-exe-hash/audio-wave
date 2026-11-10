@@ -16,8 +16,10 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - audiowave-net
 
-  backend:
+  backend-audiowave:
     build: .
     container_name: backend-audiowave
     ports:
@@ -35,5 +37,24 @@ services:
         limits:
           cpus: "1.0"
           memory: 1g
+    networks:
+      - audiowave-net
+
+  frontend-audiowave:
+    build:
+      context: ./src/main/java/com/example/audio_wave/frontend
+    container_name: frontend-audiowave
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend-audiowave
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - audiowave-net
 volumes:
   postgres_data:
+
+networks:
+  audiowave-net:
+    driver: bridge

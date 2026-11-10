@@ -10,6 +10,7 @@ public record JamendoDTO(
         Integer durationSeconds,
         @JsonProperty("artist_name") String artistName,
         @JsonProperty("album_name") String albumName,
-        @JsonProperty("image") String coverImageUrl
+        @JsonProperty("image") String coverImageUrl,
+        String audio
 ) {
 }
